@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//kometar
 class Time
 {
 	size_t seconds; //[0...59]
