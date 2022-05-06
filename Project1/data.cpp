@@ -58,9 +58,16 @@ void Data::setYear(int year)
     this->year = year;
 }
 
-Data& Data::operator==(const Data& other) const
+bool Data::operator==(const Data& other) const
 {
 return  day == other.day && month == other.month && year == other.year;
+}
+
+bool Data::operator>=(const Data& other) const
+{
+if (day >= other.day && month >= other.month && year >= other.year)
+return 1;
+return 0;
 }
     
 

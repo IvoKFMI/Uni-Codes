@@ -20,7 +20,7 @@ void setDay(int day);
 void setMonth(int month);
 void setYear(int year);
 
-Data& operator=(const Data& other);
-Data& operator>(const Data& other);
+bool operator==(const Data& other) const;
+bool operator>=(const Data& other) const;
 
 };
