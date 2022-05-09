@@ -4,11 +4,19 @@ bool Data::isLeapYear() const
 {
 return year % 4 == 0;
 }
-Data::Data(int day, int month, int year)
+
+Data::Data()
 {
-    setDay(day);
-    setMonth(month);
+    day = 1;
+    month = 1;
+    year = 1;
+}
+
+Data::Data(unsigned int day, unsigned int month, unsigned int year)
+{
     setYear(year);
+    setMonth(month);
+    setDay(day);
 }
 
 int Data::getDay() const
@@ -26,7 +34,7 @@ int Data::getYear() const
     return year;
 }
 
-void Data::setDay(int day)
+void Data::setDay(unsigned int day)
 {
     if (day > MAX_DAYS[month - 1])
 	{
@@ -35,16 +43,17 @@ void Data::setDay(int day)
     this->day = day;
 }
 
-void Data::setMonth(int month)
+void Data::setMonth(unsigned int month)
 {
     if(month > 12)
     {
         month = 1;
     }
     this->month = month;
+    setDay(this->day);
 }
 
-void Data::setYear(int year)
+void Data::setYear(unsigned int year)
 {
     
     if(isLeapYear())
@@ -56,6 +65,7 @@ void Data::setYear(int year)
         MAX_DAYS[1] = 28;
     }
     this->year = year;
+    setMonth(this->month);
 }
 
 bool Data::operator==(const Data& other) const
@@ -65,9 +75,24 @@ return  day == other.day && month == other.month && year == other.year;
 
 bool Data::operator>=(const Data& other) const
 {
-if (day >= other.day && month >= other.month && year >= other.year)
-return 1;
-return 0;
+return day >= other.day && month >= other.month && year >= other.year;
 }
-    
+
+bool Data::operator<=(const Data& other) const
+{
+return day <= other.day && month <= other.month && year <= other.year;    
+}
+
+bool Data::operator>(const Data& other) const
+{
+return day > other.day && month > other.month && year > other.year;   
+}
+
+bool Data::operator<(const Data& other) const
+{
+return day < other.day && month < other.month && year < other.year;   
+}
+
+
+
 
