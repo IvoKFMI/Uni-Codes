@@ -23,8 +23,8 @@ const Data getEnd() const;
 const char* getNote() const;
 const char* getName() const;
 
-void setBegin(Data& begin);
-void setEnd(Data& end);
+void setBegin(const Data& begin);
+void setEnd(const Data& end);
 void setNote(const char* note);
 void setName(const char* name);
 ~Reservation();

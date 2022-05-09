@@ -19,17 +19,17 @@ Data::Data(unsigned int day, unsigned int month, unsigned int year)
     setDay(day);
 }
 
-int Data::getDay() const
+const int Data::getDay() const
 {
     return day;
 }
 
-int Data::getMonth() const
+const int Data::getMonth() const
 {
     return month;
 }
 
-int Data::getYear() const
+const int Data::getYear() const
 {
     return year;
 }

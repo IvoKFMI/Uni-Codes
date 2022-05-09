@@ -12,9 +12,9 @@ public:
 Data();
 Data(unsigned int day, unsigned int month, unsigned int year);
 
-int getDay() const;
-int getMonth() const;
-int getYear() const;
+const int getDay() const;
+const int getMonth() const;
+const int getYear() const;
 
 void setDay(unsigned int day);
 void setMonth(unsigned int month);
