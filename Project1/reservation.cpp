@@ -46,3 +46,32 @@ Reservation& Reservation::operator=(const Reservation& other)
     return *this;
 }
 
+const Data Reservation::getBegin() const
+{
+    return begin;
+}
+
+const Data Reservation::getEnd() const
+{
+    return end;
+}
+
+const char* Reservation::getNote() const
+{
+    return note;
+}
+
+const char* Reservation::getName() const
+{
+    return name;
+}
+
+/*void Reservation::setBegin(const Data& begin)
+{
+begin = const Data& begin;
+}*/
+
+Reservation::~Reservation()
+{
+  free();
+}
