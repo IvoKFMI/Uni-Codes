@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<cstring>
 #include"data.h"
@@ -9,7 +10,7 @@ Data begin;
 Data end;
 char* note;
 char* name;
-const char defaul_name[ 10 ] = "default";
+const char defaul_name[10] = "default";
 
 void copyFrom(const Reservation& other);
 void free();
