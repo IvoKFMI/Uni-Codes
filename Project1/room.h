@@ -33,6 +33,9 @@ void setNumberOfRoom(unsigned int numberofroom);
 void setNumberOfBeds(unsigned int numberofbeds);
 void setAvailability(bool availability);
 
-int addReservation(const Reservation& other);
+void addReservation(const Reservation& other);
 ~Room();
+
+void resize();
+
 };

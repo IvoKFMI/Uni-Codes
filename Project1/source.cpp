@@ -1,11 +1,13 @@
 #include<iostream>
-#include"data.h"
-#include"data.cpp"
+#include "data.h"
+#include "data.cpp"
+#include "room.h"
+//#include "room.cpp"
+#include "reservation.h"
+#include"reservation.cpp"
 int main()
 {
-  Data d(24, 2, 2012);
-  Data q(24, 3, 2012);
+ 
   
-  room R;
     return 0;
 }

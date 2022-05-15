@@ -75,9 +75,7 @@ return  day == other.day && month == other.month && year == other.year;
 
 bool Data::operator>=(const Data& other) const
 {
-if(year >= other.year)
-return 1;
-//if(year = other.year && month)
+return  day >= other.day && month >= other.month && year >= other.year;
 }
 
 bool Data::operator<=(const Data& other) const

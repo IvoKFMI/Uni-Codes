@@ -37,11 +37,6 @@ const Reservation* Room::getAllReservations() const
     return allReservations;
 }
 
-const size_t Room::getMAX_RESERVATIONS() const
-{
-    return MAX_RESERVATIONS;
-}
-
 void Room::setNumberOfRoom(unsigned int numberofroom)
 {
     this->numberofroom = numberofroom;
@@ -63,7 +58,6 @@ this->numberofroom = numberofroom;
 this->numberofbeds = numberofbeds;
 this->availability = availability;
 this->numberOfReservations = numberOfReservations;
-this->MAX_RESERVATIONS = MAX_RESERVATIONS;
 allReservations = new Reservation[numberOfReservations];
 }
 
@@ -87,32 +81,26 @@ Room::Room(const Room& other)
     copyFrom(other);
 }
 
-int Room::addReservation(const Reservation& other)
+void Room::addReservation(const Reservation& other)
 {
-    //allReservations[numberOfReservations] = other.allReservations[numberOfReservations + 1];
-    //numberOfReservations++;
     if(numberOfReservations >= size ){
         resize();
     }
 
     allReservations[numberOfReservations] = other;
     numberOfReservations++;
-    
-
 }
-/*resize(){
-    size=size*2
-    reservation* buffre = new reservation(size)
 
-    fro(){
-        buff[i] = res[i]
-    }
-
-    delte []res
-
-    res = buff
-    buff = nullptr;
-
-
-
-}*/
+void Room::resize()
+{
+size_t newSize = size*2;
+Reservation* resizedArr = new Reservation[newSize];
+for(int i = 0; i < newSize; i++)
+{
+    allReservations[i] = resizedArr[i];
+}
+size*=2;
+delete[] allReservations;
+allReservations = resizedArr;
+resizedArr = nullptr;
+}
