@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+
+<!-- Иво Куманов, група 1, ф.н. 5MI0800184 -->
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="three.min.js"></script>
+		<script src="OrbitControls.js"></script>
+	</head>
+	
+	<body>
+		<script>
+			const FN = '5MI0800184'; // факултетен номер 
+		</script>
+		
+		<script src="init.js"></script>
+		<script src="CSG.js"></script>
+			
+		<script>
+		
+			// 1. преименувайте файла на moidom-g-fn.html
+			//    g=номер на група, а fn=факултетен номер
+			//
+			// 2. сменете стойността на константата FN да
+			//    е факултетния номер, за да се генерират
+			//    сцената, земята и контурът на къщата ви
+			//
+			// 3. едва тогава почвайте да строите стените
+			//    и да добавяте исканите обекти по стаите
+			//
+			// 4. в init.js се прави глобален обект scene
+			//    и в него трябва да сложите обектите си!
+			//
+			// 5. кубът по-долу е само за пример как може
+			//    да се слагат обекти, които правят сянка
+			
+			var geometry = new THREE.BoxGeometry( 8, 5, 0.2 ),
+				material = new THREE.MeshPhongMaterial( {color:'#fccc1c', shininess: 100} );
+			var materialram = new THREE.MeshPhongMaterial( {color:'white', shininess: 100} );	
+
+			var wall1 = new THREE.Mesh( geometry, material );
+				wall1.position.set( -1, 2.3, -7.9 );
+				wall1.receiveShadow = true;
+				wall1.castShadow = true;
+			
+			//scene.add( wall1 );
+
+			var window1 = new THREE.Mesh( new THREE.BoxGeometry( 2.9, 2, 0.4 ) , material );
+				window1.position.set( -2.8, 2.6, -8 );
+				window1.receiveShadow = true;
+				window1.castShadow = true;
+
+			var window1ram1 = new THREE.Mesh( new THREE.BoxGeometry( 3.4, 0.2, 0.05 ) , materialram );
+				window1ram1.position.set( -2.785, 3.69, -8 );
+			scene.add( window1ram1 );
+
+			var window1ram2 = new THREE.Mesh( new THREE.BoxGeometry( 3.4, 0.2, 0.05 ) , materialram );
+				window1ram2.position.set( -2.785, 1.51, -8 );	
+			scene.add( window1ram2 );
+
+			var window1ram3 = new THREE.Mesh( new THREE.BoxGeometry( 0.17, 2.1, 0.05 ) , materialram );
+				window1ram3.position.set( -1.255, 2.65, -8 );
+			scene.add( window1ram3 );
+
+			var window1ram4 = new THREE.Mesh( new THREE.BoxGeometry( 0.17, 2.1, 0.05 ) , materialram );
+				window1ram4.position.set( -4.32, 2.65, -8 );
+			scene.add( window1ram4 );
+
+			var window1ram5 = new THREE.Mesh( new THREE.BoxGeometry( 0.17, 2.1, 0.2 ) , materialram );
+				window1ram5.position.set( -2.79, 2.65, -7.925 );
+			scene.add( window1ram5 );
+
+			var materialgl = new THREE.MeshPhysicalMaterial( {color:'blue', transparent: true, opacity: 0.4} );
+
+			var window1gl = new THREE.Mesh( new THREE.BoxGeometry( 2.9, 2, 0.1 ) , materialgl );
+				window1gl.position.set( -2.8, 2.6, -7.9 );
+				
+			scene.add( window1gl );	
+			//scene.add( window1 );
+
+			var csg = new CSG();
+			csg.subtract([wall1, window1]);
+			var window1r = csg.toMesh();
+			window1r.receiveShadow = true;
+			window1r.castShadow = true;
+			scene.add(window1r);
+
+
+
+			var wall2 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 11.8), material);
+			    wall2.position.set(-4.9, 2.3, -1.9);
+			    wall2.receiveShadow = true;
+				wall2.castShadow = true;
+
+			var window4 = new THREE.Mesh( new THREE.BoxGeometry( 0.4, 2, 2 ) , material );
+				window4.position.set( -4.9, 2.6, 2.3 );
+				window4.receiveShadow = true;
+				window4.castShadow = true;
+				
+			var csg = new CSG();
+			csg.subtract([wall2, window4]);
+			var window4r = csg.toMesh();
+			window4r.receiveShadow = true;
+			window4r.castShadow = true;
+			scene.add(window4r);
+			
+			var window4ram1 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 0.2, 2.5 ) , materialram );
+				window4ram1.position.set( -5, 3.69, 2.3 );
+			scene.add( window4ram1 );
+
+			var window4ram2 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 0.2, 2.5 ) , materialram );
+				window4ram2.position.set( -5, 1.51, 2.3 );	
+			scene.add( window4ram2 );
+
+			var window4ram3 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 2.1, 0.17 ) , materialram );
+				window4ram3.position.set( -5, 2.65, 1.22 );
+			scene.add( window4ram3 );
+
+			var window4ram4 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 2.1, 0.17 ) , materialram );
+				window4ram4.position.set( -5, 2.65, 3.37 );
+			scene.add( window4ram4 );
+
+			var window4gl = new THREE.Mesh( new THREE.BoxGeometry( 0.1, 2, 2 ) , materialgl );
+				window4gl.position.set( -4.9, 2.6, 2.3 );
+				
+			scene.add( window4gl );
+				
+			
+			var wall3 = new THREE.Mesh( new THREE.BoxGeometry(2, 5, 0.2), material);
+			    wall3.position.set(-4, 2.3, 3.9);
+			    wall3.receiveShadow = true;
+				wall3.castShadow = true;
+
+			scene.add(wall3);
+
+			var wall4 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 2.2), material);
+			    wall4.position.set(-2.9, 2.3, 4.9);
+			    wall4.receiveShadow = true;
+				wall4.castShadow = true;
+
+			scene.add(wall4);
+
+				
+			var wall5 = new THREE.Mesh( new THREE.BoxGeometry( 10.8, 5, 0.2 ) , material );
+				wall5.position.set( 2.6, 2.3, 5.9 );
+				wall5.receiveShadow = true;
+				wall5.castShadow = true;
+            
+			var window3 = new THREE.Mesh( new THREE.BoxGeometry( 3.5, 2, 0.4 ) , material );
+				window3.position.set( 3, 2.6, 5.9 );
+				window3.receiveShadow = true;
+				window3.castShadow = true;
+
+				var window3ram1 = new THREE.Mesh( new THREE.BoxGeometry( 4.05, 0.2, 0.05 ) , materialram );
+				window3ram1.position.set( 3, 3.705, 6 );	
+
+			scene.add( window3ram1 );
+
+			var window3ram2 = new THREE.Mesh( new THREE.BoxGeometry( 4.05, 0.2, 0.05 ) , materialram );
+				window3ram2.position.set( 3, 1.505, 6 );	
+
+			scene.add( window3ram2 );
+
+			
+			var window3ram3 = new THREE.Mesh( new THREE.BoxGeometry( 0.17, 2.1, 0.05 ) , materialram );
+				window3ram3.position.set( 1.17, 2.65, 6 );
+			
+			scene.add( window3ram3 );
+
+			var window2ram4 = new THREE.Mesh( new THREE.BoxGeometry( 0.17, 2.1, 0.05 ) , materialram );
+				window2ram4.position.set( 4.83, 2.65, 6 );
+			
+			scene.add( window2ram4 );
+
+			var window3ram5 = new THREE.Mesh( new THREE.BoxGeometry( 0.17, 2.1, 0.2 ) , materialram );
+				window3ram5.position.set( 3, 2.65, 5.925 );
+			
+			scene.add( window3ram5 );
+
+			var window3gl = new THREE.Mesh( new THREE.BoxGeometry( 3.5, 2, 0.1 ) , materialgl );
+				window3gl.position.set( 3, 2.6, 5.93 );
+
+			scene.add( window3gl );	
+
+
+			var wall6 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 8), material);
+			    wall6.position.set(7.9, 2.3, 2);
+			    wall6.receiveShadow = true;
+				wall6.castShadow = true;
+
+			scene.add(wall6);
+
+			var wall7 = new THREE.Mesh( new THREE.BoxGeometry( 4.9, 5, 0.2 ) , material );
+				wall7.position.set( 5.4, 2.3, -1.9 );
+				wall7.receiveShadow = true;
+				wall7.castShadow = true;
+			
+			scene.add( wall7 );
+
+			var wall8 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 6), material);
+			    wall8.position.set(2.9, 2.3, -4.8);
+			    wall8.receiveShadow = true;
+				wall8.castShadow = true;
+
+			//scene.add(wall8);
+
+			var window2 = new THREE.Mesh( new THREE.BoxGeometry( 0.4, 2, 2.9 ) , material );
+				window2.position.set( 2.9, 2.6, -5 );
+				window2.receiveShadow = true;
+				window2.castShadow = true;
+
+			var window2ram1 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 0.2, 3.4 ) , materialram );
+				window2ram1.position.set( 3, 3.69, -4.99 );	
+
+			scene.add( window2ram1 );
+
+			var window2ram2 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 0.2, 3.4 ) , materialram );
+				window2ram2.position.set( 3, 1.51, -4.99 );	
+
+			scene.add( window2ram2 );
+
+			
+			var window2ram3 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 2.1, 0.17 ) , materialram );
+				window2ram3.position.set( 3, 2.65, -6.53 );
+			
+			scene.add( window2ram3 );
+
+			var window2ram4 = new THREE.Mesh( new THREE.BoxGeometry( 0.05, 2.1, 0.17 ) , materialram );
+				window2ram4.position.set( 3, 2.65, -3.465 );
+			
+			scene.add( window2ram4 );
+
+			var window2ram5 = new THREE.Mesh( new THREE.BoxGeometry( 0.2, 2.1, 0.17 ) , materialram );
+				window2ram5.position.set( 2.925, 2.65, -4.997 );
+			
+			scene.add( window2ram5 );
+
+			var window2gl = new THREE.Mesh( new THREE.BoxGeometry( 0.1, 2, 2.9 ) , materialgl );
+				window2gl.position.set( 2.9, 2.6, -5 );
+
+			scene.add( window2gl );	
+			
+			var csg = new CSG();
+			csg.subtract([wall8, window2]);
+			var window2r = csg.toMesh();
+			window2r.receiveShadow = true;
+			window2r.castShadow = true;
+			scene.add(window2r);
+
+			var wall9 = new THREE.Mesh( new THREE.BoxGeometry( 5.2, 5, 0.2 ) , material );
+				wall9.position.set( 5.4, 2.3, 1.4 );
+				wall9.receiveShadow = true;
+				wall9.castShadow = true;
+			
+			//scene.add( wall9 );
+
+			var doorex1 = new THREE.Mesh( new THREE.BoxGeometry( 1.6, 3.6, 0.4 ) , material );
+				doorex1.position.set( 4.2, 2.1, 1.4 );
+				doorex1.receiveShadow = true;
+				doorex1.castShadow = true;
+			
+			//scene.add( door1 );
+
+			var csg = new CSG();
+			csg.subtract([wall9, doorex1]);
+			var door1 = csg.toMesh();
+			door1.receiveShadow = true;
+			door1.castShadow = true;
+			scene.add(door1);
+
+			
+
+			var wall10 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 3.2), material);
+			    wall10.position.set(2.9, 2.3, -0.2);
+			    wall10.receiveShadow = true;
+				wall10.castShadow = true;
+
+			scene.add(wall10);
+
+			var wall11 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 7), material);
+			    wall11.position.set(-0.7, 2.3, -4.3);
+			    wall11.receiveShadow = true;
+				wall11.castShadow = true;
+
+			scene.add(wall11);
+
+			var wall12 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 5, 2), material);
+			    wall12.position.set(-1.32, 2.3, -0.1);
+				wall12.rotation.set(0, -0.7, 0);
+			    wall12.receiveShadow = true;
+				wall12.castShadow = true;
+
+			scene.add(wall12);
+
+			var wall13 = new THREE.Mesh( new THREE.BoxGeometry(3, 5, 0.2), material);
+			    wall13.position.set(-3.385, 2.3, 0.625);
+			    wall13.receiveShadow = true;
+				wall13.castShadow = true;
+
+			//scene.add(wall13);
+
+			var doorex4 = new THREE.Mesh( new THREE.BoxGeometry( 1.6, 3.8, 0.4 ) , material );
+				doorex4.position.set( -3.8, 1.7, 0.6 );
+				doorex4.receiveShadow = true;
+				doorex4.castShadow = true;
+
+			//scene.add( doorex4 );
+			
+			var csg = new CSG();
+			csg.subtract([wall13, doorex4]);
+			var door4 = csg.toMesh();
+			door4.receiveShadow = true;
+			door4.castShadow = true;
+			scene.add(door4);
+
+			var wall14 = new THREE.Mesh( new THREE.BoxGeometry(3.6, 5, 0.2), material);
+			    wall14.position.set(1.1, 2.3, -0.8);
+			    wall14.receiveShadow = true;
+				wall14.castShadow = true;
+
+			//scene.add( wall14 );
+
+			var doorex5 = new THREE.Mesh( new THREE.BoxGeometry( 1.6, 3.8, 0.4 ) , material );
+				doorex5.position.set( 0.35, 1.7, -0.8 );
+				doorex5.receiveShadow = true;
+				doorex5.castShadow = true;
+
+			//scene.add( doorex5 );
+			
+			var csg = new CSG();
+			csg.subtract([wall14, doorex5]);
+			var door5 = csg.toMesh();
+			door5.receiveShadow = true;
+			door5.castShadow = true;
+			scene.add(door5);
+
+			var materialpt = new THREE.MeshPhongMaterial({color:'white'});
+
+			var paint10 = new THREE.Mesh( new THREE.BoxGeometry(0.05, 5, 3.1), materialpt);
+			    paint10.position.set(3.02, 2.3, -0.25);
+			    paint10.receiveShadow = true;
+				paint10.castShadow = true;
+
+			scene.add(paint10);
+
+			var paint11 = new THREE.Mesh( new THREE.BoxGeometry(0.05, 5, 3.1), materialpt);
+			    paint11.position.set(7.78, 2.3, -0.25);
+			    paint11.receiveShadow = true;
+				paint11.castShadow = true;
+
+			scene.add(paint11);
+
+			var paint12 = new THREE.Mesh( new THREE.BoxGeometry( 4.8, 5, 0.05 ) , materialpt );
+			    paint12.position.set( 5.4, 2.3, -1.78);
+				paint12.receiveShadow = true;
+				paint12.castShadow = true;
+			
+			scene.add( paint12 );
+
+			var paint13 = new THREE.Mesh( new THREE.BoxGeometry( 4.8, 5, 0.05 ) , materialpt );
+			    paint13.position.set( 5.4, 2.3, 1.28);
+				paint13.receiveShadow = true;
+				paint13.castShadow = true;
+			
+			//scene.add( paint13 );
+
+			var doorex2 = new THREE.Mesh( new THREE.BoxGeometry( 1.6, 3.6, 0.4 ) , material );
+				doorex2.position.set( 4.2, 2.1, 1.2 );
+				doorex2.receiveShadow = true;
+				doorex2.castShadow = true;
+
+			//scene.add( doorex2 );
+
+			var csg = new CSG();
+			csg.subtract([paint13, doorex2]);
+			var door2 = csg.toMesh();
+			door2.receiveShadow = true;
+			door2.castShadow = true;
+			scene.add(door2);
+
+			var doorex3 = new THREE.Mesh( new THREE.BoxGeometry( 1.8, 3.7, 0.4 ) , material );
+				doorex3.position.set( -1.7, 1.87, 5.9 );
+				doorex3.receiveShadow = true;
+				doorex3.castShadow = true;
+			
+			//scene.add( doorex3 );
+			
+			var csg = new CSG();
+			csg.subtract([wall5, doorex3, window3]);
+			var dw3 = csg.toMesh();
+			dw3.receiveShadow = true;
+			dw3.castShadow = true;
+			scene.add(dw3);
+
+			var materialgr = new THREE.MeshLambertMaterial( {color:'red'} );
+			var materialkn = new THREE.MeshLambertMaterial( {color:'0xECD2CC'} );
+
+			var ground1 = new THREE.Mesh( new THREE.BoxGeometry (7.7, 0.1, 11.6), materialgr);
+			    ground1.position.set(-1.05, 0, -2);
+				ground1.receiveShadow = true;
+				
+			scene.add(ground1);
+
+			var ground2 = new THREE.Mesh( new THREE.BoxGeometry (5.7, 0.1, 2.2), materialgr);
+			    ground2.position.set(-0.05, 0, 4.8);
+				ground2.receiveShadow = true;
+				
+			scene.add(ground2);
+
+			var ground3 = new THREE.Mesh( new THREE.BoxGeometry (5, 0.1, 4.4), materialkn);
+			    ground3.position.set(5.3, 0, 3.6);
+				ground3.receiveShadow = true;
+				
+			scene.add(ground3);
+
+			//----------------------------------------------------
+			//Obzavejdane - Leglo
+            var bed = new THREE.Group();
+				bed.receiveShadow = true;
+				bed.castShadow = true;
+            var bedmaterial = new THREE.MeshPhongMaterial( {color: '#663300'} );
+			var odealomaterial = new THREE.MeshPhongMaterial( {color: 'yellow'} );
+			var vuzglavnicamaterial = new THREE.MeshPhongMaterial( {color: 'green'} );
+			var trubamaterial = new THREE.MeshPhongMaterial( {color: 'white'} );
+
+			var osnova = new THREE.Mesh(new THREE.BoxGeometry(1.75, 0.8, 3), bedmaterial);
+			    osnova.position.set(1.1, 0.2, -6.38);
+				osnova.receiveShadow = true;
+				osnova.castShadow = true;
+				bed.add( osnova );
+			var odealo = new THREE.Mesh(new THREE.BoxGeometry(1.75, 0.1, 2.2), odealomaterial);	
+			    odealo.position.set(1.1, 0.65, -5.93);
+				odealo.receiveShadow = true;
+				odealo.castShadow = true;
+				bed.add( odealo );
+			var vuzglavnica = new THREE.Mesh( new THREE.BoxGeometry( 0.5, 0.25, 0.3 ), vuzglavnicamaterial);	
+			    vuzglavnica.position.set(1.55, 0.6, -7.4);
+				bed.add( vuzglavnica );
+			var vuzglavnica = new THREE.Mesh( new THREE.BoxGeometry( 0.5, 0.25, 0.3 ), vuzglavnicamaterial);	
+			    vuzglavnica.position.set(0.65, 0.6, -7.4);
+				bed.add( vuzglavnica );
+			scene.add( bed );
+            
+			//Garderob
+			var wardrobe = new THREE.Group();
+				wardrobe.receiveShadow = true;
+				wardrobe.castShadow = true;
+			var wardmaterial = new THREE.MeshPhongMaterial( {color: '#663300'} );
+			var ramka = new THREE.Mesh(new THREE.BoxGeometry(0.7, 4.2, 2.3), wardmaterial);	
+			    ramka.position.set(2.45, 2.1, -2.2);
+				ramka.receiveShadow = true;
+				ramka.castShadow = true;
+				//wardrobe.add(ramka);
+            var vutre = new THREE.Mesh(new THREE.BoxGeometry(0.6, 4, 2.1), wardmaterial);
+			    vutre.position.set(2.25, 2.1, -2.2);
+				vutre.receiveShadow = true;
+				vutre.castShadow = true;
+				//wardrobe.add(vutre);
+			var csg = new CSG();
+			csg.subtract([ramka, vutre]);
+			var garderob = csg.toMesh();
+			garderob.receiveShadow = true;
+			garderob.castShadow = true;
+			wardrobe.add(garderob);
+
+			var raft1 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.1, 2.2), wardmaterial);
+			    raft1.position.set(2.4, 1, -2.2);
+				raft1.receiveShadow = true;
+				raft1.castShadow = true;
+				wardrobe.add(raft1);
+
+			var raft2 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.1, 2.2), wardmaterial);
+			    raft2.position.set(2.4, 0.6, -2.2);
+				raft2.receiveShadow = true;
+				raft2.castShadow = true;
+				wardrobe.add(raft2);
+
+			var raft3 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.1, 2.2), wardmaterial);
+			    raft3.position.set(2.4, 1.4, -2.2);
+				raft3.receiveShadow = true;
+				raft3.castShadow = true;
+				wardrobe.add(raft3);
+
+			var truba = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 2.2, 32, 64), trubamaterial);
+			    truba.position.set(2.4, 3.4, -2.2);
+				truba.rotation.set(1.57, 0, 0);
+				truba.receiveShadow = true;
+				truba.castShadow = true;
+				wardrobe.add(truba);
+
+			var vrata1 = new THREE.Mesh(new THREE.BoxGeometry(0.1, 4.2, 1.15), wardmaterial);	
+			    vrata1.position.set(2.05, 2.1, -1.625);
+				vrata1.receiveShadow = true;
+				vrata1.castShadow = true;
+				wardrobe.add(vrata1);
+			var vrata2 = new THREE.Mesh(new THREE.BoxGeometry(0.1, 4.2, 1.15), wardmaterial);	
+			    vrata2.position.set(1.6, 2.1, -3.12);
+				vrata2.rotation.set(0, 1.9, 0);
+				vrata2.receiveShadow = true;
+				vrata2.castShadow = true;
+				wardrobe.add(vrata2);
+			var drujka1 = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.4, 0.07), trubamaterial);	
+			    drujka1.position.set(1.15, 2.3, -3.02);
+				drujka1.rotation.set(0, 1.9, 0);
+				wardrobe.add(drujka1);
+			var drujka2 = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.4, 0.07), trubamaterial);	
+			    drujka2.position.set(2, 2.3, -2.07);
+				wardrobe.add(drujka2);		
+			scene.add(wardrobe);
+
+			//shkafcheta
+			var shkaf1 = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.8, 0.5), trubamaterial);	
+			    shkaf1.position.set(2.42, 0.2, -7.6);
+				shkaf1.receiveShadow = true;
+				shkaf1.castShadow = true;
+				scene.add(shkaf1);
+
+			var shkaf2 = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.8, 0.5), trubamaterial);	
+			    shkaf2.position.set(-0.232, 0.2, -7.6);
+				shkaf2.receiveShadow = true;
+				shkaf2.castShadow = true;
+				scene.add(shkaf2);
+			var dr1 = new THREE.Mesh(new THREE.SphereGeometry(0.05), vuzglavnicamaterial);	
+			    dr1.position.set(-0.232, 0.5, -7.32);
+				scene.add(dr1);	
+			var dr2 = new THREE.Mesh(new THREE.SphereGeometry(0.05), vuzglavnicamaterial);	
+			    dr2.position.set(2.42, 0.5, -7.32);
+				scene.add(dr2);
+
+            //Vana-Banq
+			var vana = new THREE.Group();
+				vana.receiveShadow = true;
+				vana.castShadow = true;
+			var materialvana = new THREE.MeshPhongMaterial( {color: '0xF0F3F4'} );
+			var	vanaosn = new THREE.Mesh(new THREE.BoxGeometry(3, 1, 1.4), materialvana);
+                vanaosn.position.set(6.25, 0.5, -1.04);
+				//vana.add(vanaosn);
+			var dupka = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 2, 32, 64), vuzglavnicamaterial);
+			    dupka.position.set(6.1, 0.7, -1.05);
+				dupka.rotation.set(0, 0, 1.57);
+				//vana.add(dupka);
+			var sfera1 = new THREE.Mesh(new THREE.SphereGeometry(0.558, 32, 64, 1), vuzglavnicamaterial);	
+			    sfera1.position.set(7, 0.7, -1.05);
+	
+			var csg = new CSG();
+			csg.subtract([vanaosn, dupka, sfera1]);
+			var korito = csg.toMesh();
+			korito.receiveShadow = true;
+			korito.castShadow = true;
+			vana.add(korito);
+
+            var materialcheshma = new THREE.MeshPhongMaterial( {color:'silver'} );
+			var cheshma1 = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.05, 10, 40, 2.1), materialcheshma);
+			cheshma1.position.set(7.37, 1, -1.05);
+			vana.add(cheshma1);
+
+			var sfera2 = new THREE.Mesh(new THREE.SphereGeometry(0.04, 32, 64, 1), new THREE.MeshPhongMaterial( {color:'blue'} ));	
+			    sfera2.position.set(7.55, 1.029, -1.13);
+			vana.add(sfera2)
+			var sfera3 = new THREE.Mesh(new THREE.SphereGeometry(0.04, 32, 64, 1), new THREE.MeshPhongMaterial( {color:'red'} ));	
+			    sfera3.position.set(7.55, 1.029, -0.97);
+			vana.add(sfera3);
+			var sifon = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.01, 0.06), new THREE.MeshPhongMaterial( {color:'black'} ));
+			    sifon.position.set(7.1, 0.17, -1.05);
+				vana.add(sifon);
+				
+			
+			scene.add(vana);
+			var mivka1 = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.4, 0.9), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    mivka1.position.set(3.5, 1.5, -1.05);
+				//scene.add(mivka1);
+			var mivka1h = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.3, 0.6), new THREE.MeshPhongMaterial( {color:'black'} ));
+			    mivka1h.position.set(3.57, 1.57, -1.05);
+				//scene.add(mivka1h);
+			var csg = new CSG();
+			csg.subtract([mivka1, mivka1h]);
+			var mifka = csg.toMesh();
+			mifka.receiveShadow = true;
+			mifka.castShadow = true;
+			vana.add(mifka);
+			var cheshma1 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.28, 0.07), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    cheshma1.position.set(3.2, 1.8, -1.05);
+				scene.add(cheshma1);
+			var cheshma2 = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.07, 0.07), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    cheshma2.position.set(3.3, 1.93, -1.05);
+				scene.add(cheshma2);
+			var sifon1 = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.01, 0.06), new THREE.MeshPhongMaterial( {color:'black'} ));
+			    sifon1.position.set(3.6, 1.425, -1.05);
+				scene.add(sifon1);
+			var toaletna1 = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.4, 0.95), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    toaletna1.position.set(7.25, 0.6, 0.5);
+				//scene.add(toaletna1);
+			var toaletna2 = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.1, 0.95), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    toaletna2.position.set(7.74, 1.3, 0.5);
+				scene.add(toaletna2);
+			var toaletna3 = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 0.7), new THREE.MeshPhongMaterial( {color:'black'} ));
+			    toaletna3.position.set(7.2, 0.7, 0.5);
+				//scene.add(toaletna3);
+			var sfera4 = new THREE.Mesh(new THREE.SphereGeometry(0.13, 32, 64, 1), new THREE.MeshPhongMaterial( {color:'blue'} ));	
+			    sfera4.position.set(7.4, 0.58, 0.5);
+			//scene.add(sfera4)
+			var csg = new CSG();
+			csg.subtract([toaletna1, toaletna3, sfera4]);
+			var kenef = csg.toMesh();
+			kenef.receiveShadow = true;
+			kenef.castShadow = true;
+			vana.add(kenef);
+			var toaletna4 = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.25, 0.28), new THREE.MeshPhongMaterial( {color:'black'} ));
+			    toaletna4.position.set(7.74, 2, 0.5);
+				scene.add(toaletna4);
+			var toaletna5 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.23, 0.05), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    toaletna5.position.set(7.7, 2, 0.5);
+				scene.add(toaletna5);	
+
+            //Kuhnq
+			var kuhnq1 = new THREE.Mesh(new THREE.BoxGeometry(0.8, 2.5, 4.4), wardmaterial);
+			    kuhnq1.position.set(7.4, 0.7, 3.65);
+				kuhnq1.receiveShadow = true;
+			    kuhnq1.castShadow = true;
+				scene.add(kuhnq1);
+				
+			var kuhnq2 = new THREE.Mesh(new THREE.BoxGeometry(2, 2.5, 0.8), wardmaterial);
+			    kuhnq2.position.set(6.05, 0.7, 5.4);
+				kuhnq2.receiveShadow = true;
+			    kuhnq2.castShadow = true;
+				scene.add(kuhnq2);
+			var vratak1 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 1.85, 0.9), wardmaterial);
+			    vratak1.position.set(6.95, 1.02, 4.54);
+				scene.add(vratak1);
+			var drujkak1 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak1.position.set(7, 1.7, 4.2);
+				drujkak1.rotation.set(0, 0, 1.57);
+				scene.add(drujkak1);
+			var vratak2 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 1.85, 0.9), wardmaterial);
+			    vratak2.position.set(6.95, 1.02, 3.615);
+				scene.add(vratak2);
+			var drujkak2 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak2.position.set(7, 1.7, 3.95);
+				drujkak2.rotation.set(0, 0, 1.57);
+				scene.add(drujkak2);
+			var vratak3	= new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.85, 0.07), wardmaterial);
+			    vratak3.position.set(6.42, 1.02, 4.95);
+				scene.add(vratak3);
+			var drujkak3 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak3.position.set(6.08, 1.7, 5);
+				drujkak3.rotation.set(0, -1.57, 1.57);
+				scene.add(drujkak3);
+			var vratak4	= new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.85, 0.07), wardmaterial);
+			    vratak4.position.set(5.5, 1.02, 4.95);
+				scene.add(vratak4);
+			var drujkak4 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak4.position.set(5.85, 1.7, 5);
+				drujkak4.rotation.set(0, -1.57, 1.57);
+				scene.add(drujkak4);
+
+			var kuhnq3 = new THREE.Mesh(new THREE.BoxGeometry(0.8, 1.2, 4.4), wardmaterial);
+			    kuhnq3.position.set(7.4, 4, 3.65);
+				kuhnq3.receiveShadow = true;
+			    kuhnq3.castShadow = true;
+				scene.add(kuhnq3);
+			var vratak5 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 1.17, 0.9), wardmaterial);
+			    vratak5.position.set(6.95, 4, 4.54);
+				scene.add(vratak5);
+			var drujkak5 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak5.position.set(7, 3.66, 4.2);
+				drujkak5.rotation.set(0, 0, 1.57);
+				scene.add(drujkak5);
+			var vratak6 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 1.17, 0.9), wardmaterial);
+			    vratak6.position.set(6.95, 4, 3.615);
+				scene.add(vratak6);
+			var drujkak6 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak6.position.set(7, 3.66, 3.95);
+				drujkak6.rotation.set(0, 0, 1.57);
+				scene.add(drujkak6);
+			var kuhnq4 = new THREE.Mesh(new THREE.BoxGeometry(2, 1.2, 0.8), wardmaterial);
+			    kuhnq4.position.set(6.05, 4, 5.4);
+				kuhnq4.receiveShadow = true;
+			    kuhnq4.castShadow = true;
+				scene.add(kuhnq4);
+			var vratak7	= new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.17, 0.07), wardmaterial);
+			    vratak7.position.set(6.42, 4, 4.95);
+				scene.add(vratak7);	
+			var drujkak7 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak7.position.set(6.08, 3.66, 5);
+				drujkak7.rotation.set(0, -1.57, 1.57);
+				scene.add(drujkak7);
+			var vratak8	= new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.17, 0.07), wardmaterial);
+			    vratak8.position.set(5.5, 4, 4.95);
+				scene.add(vratak8);
+			var drujkak8 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.02, 10, 40, 3.14), new THREE.MeshPhongMaterial( {color:'silver'} ));
+			    drujkak8.position.set(5.85, 3.66, 5);
+				drujkak8.rotation.set(0, -1.57, 1.57);
+				scene.add(drujkak8);
+
+			//arfa
+			var arfa = new THREE.Group();
+			var arfamaterial = new THREE.MeshPhongMaterial( {color:'0xF3F5B5'} );
+            var osn = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.17, 32, 64), arfamaterial);
+			    osn.position.set(6.1, 0, 8);
+				osn.rotation.set(0, 0, 0);
+				osn.receiveShadow = true;
+				osn.castShadow = true;
+				arfa.add(osn);
+			var osn1 = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.17, 2.4, 32, 64), arfamaterial);
+			    osn1.position.set(6.75, 1.05, 8);
+				osn1.rotation.set(0, 0,-0.485);
+				osn1.receiveShadow = true;
+				osn1.castShadow = true;
+				arfa.add(osn1);
+				
+			var osn2 = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.09, 0.7, 10, 64), arfamaterial);
+			    osn2.position.set(5.95, 0.47, 8);
+				osn2.rotation.set(0, 0,0);
+				osn2.receiveShadow = true;
+				osn2.castShadow = true;
+				arfa.add(osn2);
+			var osn3 = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.03, 32, 64), arfamaterial);
+			    osn3.position.set(5.95, 0.1, 8);
+				osn3.rotation.set(0, 0, 0);
+				osn3.receiveShadow = true;
+				osn3.castShadow = true;
+				arfa.add(osn3);
+				
+			var osn4 = new THREE.Mesh(new THREE.CylinderGeometry(0.046, 0.046, 1.5, 10, 64), arfamaterial);
+			    osn4.position.set(5.95, 1.54, 8);
+				osn4.rotation.set(0, 0,0);
+				osn4.receiveShadow = true;
+				osn4.castShadow = true;
+				arfa.add(osn4);
+			var osn5 = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.05, 0.7, 10, 64), arfamaterial);
+			    osn5.position.set(5.95, 2.6, 8);
+				osn5.rotation.set(0, 0,0);
+				osn5.receiveShadow = true;
+				osn5.castShadow = true;
+				arfa.add(osn5);
+			var osn5 = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.05, 2, 40, 3.14),  arfamaterial);
+			    osn5.position.set(7.2, 2.17, 8);
+				osn5.rotation.set(0, 0, -0.6);
+				osn5.receiveShadow = true;
+				osn5.castShadow = true;
+				arfa.add(osn5);
+			var osn6 = new THREE.Mesh(new THREE.TorusGeometry(0.21, 0.05, 2, 40, 3.14),  arfamaterial);
+			    osn6.position.set(6.92, 2.38, 8);
+				osn6.rotation.set(0, 0, 2.5);
+				osn6.receiveShadow = true;
+				osn6.castShadow = true;
+				arfa.add(osn6);
+			var osn7 = new THREE.Mesh(new THREE.TorusGeometry(0.35, 0.05, 2, 40, 3.2),  arfamaterial);
+			    osn7.position.set(6.463, 2.7, 8);
+				osn7.rotation.set(0, 0, -0.6);
+				osn7.receiveShadow = true;
+				osn7.castShadow = true;
+				arfa.add(osn7);
+			var osn8 = new THREE.Mesh(new THREE.TorusGeometry(0.21, 0.05, 2, 40, 1.5),  arfamaterial);
+			    osn8.position.set(5.99, 3, 8);
+				osn8.rotation.set(3.14, 0, 0.5);
+				osn8.receiveShadow = true;
+				osn8.castShadow = true;
+				arfa.add(osn8);
+				
+			scene.add(arfa);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 2.8, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.1, 1.4, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 2.8, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.2, 1.5, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);	
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 2.8, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.3, 1.6, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 2.7, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.4, 1.68, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 2.6, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.5, 1.74, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);	
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 2.5, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.6, 1.77, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 1.1, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.7, 1.75, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.84, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.8, 1.78, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.62, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(6.9, 1.85, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.5, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(7, 1.9, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.38, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(7.1, 2.05, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.add(struna);
+			var struna = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.27, 10, 64), new THREE.MeshPhongMaterial({color:'black'}));
+			    struna.position.set(7.2, 2.14, 8);
+				struna.rotation.set(0, 0,0);
+				struna.receiveShadow = true;
+				struna.castShadow = true;
+				arfa.position.set(-9.3, 0.1, 5);
+				arfa.rotation.set(0, 1.57, 0)
+				arfa.add(struna);
+			//televizor	
+			var televizor1 = new THREE.Mesh( new THREE.BoxGeometry(0.08, 1.9, 3), new THREE.MeshPhongMaterial({color:'black'}));
+			    televizor1.position.set(-4.74, 2.6, -5);
+				televizor1.receiveShadow = true;
+				televizor1.castShadow = true;
+			//scene.add(televizor1);
+			var televizor2 = new THREE.Mesh( new THREE.BoxGeometry(0.05, 1.8, 2.9), new THREE.MeshPhongMaterial({color:'grey'}));
+			    televizor2.position.set(-4.722, 2.6, -5);
+				televizor2.receiveShadow = true;
+				televizor2.castShadow = true;
+			//scene.add(televizor2);
+			var csg = new CSG();
+			csg.subtract([televizor1, televizor2]);
+			var televizor = csg.toMesh();
+			televizor.receiveShadow = true;
+			televizor.castShadow = true;
+			scene.add(televizor);
+			var televizor3 = new THREE.Mesh( new THREE.BoxGeometry(0.03, 1.8, 2.9), new THREE.MeshPhongMaterial({color:'grey'}));
+			    televizor3.position.set(-4.725, 2.6, -5);
+				televizor3.receiveShadow = true;
+				televizor3.castShadow = true;
+			scene.add(televizor3);
+			var svetlina = new THREE.Mesh( new THREE.SphereGeometry(0.022), new THREE.MeshPhongMaterial({color:'red'}));
+			    svetlina.position.set(-4.7, 1.677, -6.2);
+			scene.add(svetlina);
+			//divan
+			var divan1 = new THREE.Mesh( new THREE.BoxGeometry(1.6, 0.8, 3), wardmaterial);
+			    divan1.position.set(-1.5, 0.6, -5);
+				divan1.receiveShadow = true;
+				divan1.castShadow = true;
+			scene.add(divan1);
+			var krak1 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 0.2, 32, 64), new THREE.MeshPhongMaterial({color:'grey'}));
+			    krak1.position.set(-0.9, 0.1, -3.6);
+			scene.add(krak1);
+			var krak2 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 0.2, 32, 64), new THREE.MeshPhongMaterial({color:'grey'}));
+			    krak2.position.set(-0.9, 0.1, -6.41);
+			scene.add(krak2);
+			var krak3 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 0.2, 32, 64), new THREE.MeshPhongMaterial({color:'grey'}));
+			    krak3.position.set(-2.15, 0.1, -6.41);
+			scene.add(krak3);
+			var krak4 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 0.2, 32, 64), new THREE.MeshPhongMaterial({color:'grey'}));
+			    krak4.position.set(-2.15, 0.1, -3.6);
+			scene.add(krak4);
+			var divan2 = new THREE.Mesh( new THREE.BoxGeometry(0.2, 1.1, 3), wardmaterial);
+			    divan2.position.set(-0.9, 1.5, -5);
+				divan2.receiveShadow = true;
+				divan2.castShadow = true;
+			scene.add(divan2);
+			var divan3 = new THREE.Mesh( new THREE.BoxGeometry(0.27, 1.1, 1.3), wardmaterial);
+			    divan3.position.set(-1.2, 1.5, -5.84);
+				divan3.receiveShadow = true;
+				divan3.castShadow = true;
+			scene.add(divan3);
+			var divan4 = new THREE.Mesh( new THREE.BoxGeometry(0.27, 1.1, 1.3), wardmaterial);
+			    divan4.position.set(-1.2, 1.5, -4.15);
+				divan4.receiveShadow = true;
+				divan4.castShadow = true;
+			scene.add(divan4);
+			//masa
+			var krakm1 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 2.3, 32, 64), wardmaterial);
+			    krakm1.position.set(1, 0.5, 4.8);
+			scene.add(krakm1);
+			var krakm1h = new THREE.Mesh( new THREE.CylinderGeometry(0.13, 0.13, 0.1, 32, 64), wardmaterial);
+			    krakm1h.position.set(1, 0.1, 4.8);
+			scene.add(krakm1h);
+			var krakm2 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 2.3, 32, 64), wardmaterial);
+			    krakm2.position.set(1, 0.5, 3.3);
+			scene.add(krakm2);
+			var krakm2h = new THREE.Mesh( new THREE.CylinderGeometry(0.13, 0.13, 0.1, 32, 64), wardmaterial);
+			    krakm2h.position.set(1, 0.1, 3.3);
+			scene.add(krakm2h);
+			var krakm3 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 2.3, 32, 64), wardmaterial);
+			    krakm3.position.set(3.4, 0.5, 3.3);
+			scene.add(krakm3);
+			var krakm3h = new THREE.Mesh( new THREE.CylinderGeometry(0.13, 0.13, 0.1, 32, 64), wardmaterial);
+			    krakm3h.position.set(3.4, 0.1, 3.3);
+			scene.add(krakm3h);
+			var krakm4 = new THREE.Mesh( new THREE.CylinderGeometry(0.09, 0.09, 2.3, 32, 64), wardmaterial);
+			    krakm4.position.set(3.4, 0.5, 4.8);
+			scene.add(krakm4);
+			var krakm4h = new THREE.Mesh( new THREE.CylinderGeometry(0.13, 0.13, 0.1, 32, 64), wardmaterial);
+			    krakm4h.position.set(3.4, 0.1, 4.8);
+			scene.add(krakm4h);
+			var tabla = new THREE.Mesh( new THREE.BoxGeometry(2.9, 0.2, 1.7), wardmaterial);
+			    tabla.position.set(2.2, 1.7, 4.05);
+				tabla.receiveShadow = true;
+				tabla.castShadow = true;
+			scene.add(tabla);
+			//stol
+			var stol1 = new THREE.Group();
+			scene.add(stol1);
+			var kraks1 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks1.position.set(1.8, 0.5, 2.4);
+			stol1.add(kraks1);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 2.4);
+			stol1.add(kraks2);
+			var kraks3 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks3.position.set(1.8, 0.5, 3.1);
+			stol1.add(kraks3);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 3.1);
+			stol1.add(kraks2);
+			var tabla1 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 0.1, 0.9), wardmaterial);
+			    tabla1.position.set(2.15, 1, 2.75);
+				tabla1.receiveShadow = true;
+				tabla1.castShadow = true;
+			stol1.add(tabla1);
+			var tabla2 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 1.1, 0.1), wardmaterial);
+			    tabla2.position.set(2.15, 1.5, 2.3);
+				tabla2.receiveShadow = true;
+				tabla2.castShadow = true;
+			stol1.add(tabla2);
+
+			var stol2 = new THREE.Group();
+			scene.add(stol2);
+			var kraks1 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks1.position.set(1.8, 0.5, 2.4);
+			stol2.add(kraks1);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 2.4);
+			stol2.add(kraks2);
+			var kraks3 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks3.position.set(1.8, 0.5, 3.1);
+			stol2.add(kraks3);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 3.1);
+			stol2.add(kraks2);
+			var tabla1 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 0.1, 0.9), wardmaterial);
+			    tabla1.position.set(2.15, 1, 2.75);
+				tabla1.receiveShadow = true;
+				tabla1.castShadow = true;
+			stol2.add(tabla1);
+			var tabla2 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 1.1, 0.1), wardmaterial);
+			    tabla2.position.set(2.15, 1.5, 2.3);
+				tabla2.receiveShadow = true;
+				tabla2.castShadow = true;
+			stol2.add(tabla2);
+			stol2.position.set(-2.45, 0.1, 6.15);
+			stol2.rotation.set(0, 1.57, 0);
+
+			var stol3 = new THREE.Group();
+			scene.add(stol3);
+			var kraks1 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks1.position.set(1.8, 0.5, 2.4);
+			stol3.add(kraks1);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 2.4);
+			stol3.add(kraks2);
+			var kraks3 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks3.position.set(1.8, 0.5, 3.1);
+			stol3.add(kraks3);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 3.1);
+			stol3.add(kraks2);
+			var tabla1 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 0.1, 0.9), wardmaterial);
+			    tabla1.position.set(2.15, 1, 2.75);
+				tabla1.receiveShadow = true;
+				tabla1.castShadow = true;
+			stol3.add(tabla1);
+			var tabla2 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 1.1, 0.1), wardmaterial);
+			    tabla2.position.set(2.15, 1.5, 2.3);
+				tabla2.receiveShadow = true;
+				tabla2.castShadow = true;
+			stol3.add(tabla2);
+			stol3.position.set(6.75, 0.1, 1.85);
+			stol3.rotation.set(0, -1.57, 0);
+
+			var stol4 = new THREE.Group();
+			scene.add(stol4);
+			var kraks1 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks1.position.set(1.8, 0.5, 2.4);
+			stol4.add(kraks1);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 2.4);
+			stol4.add(kraks2);
+			var kraks3 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks3.position.set(1.8, 0.5, 3.1);
+			stol4.add(kraks3);
+			var kraks2 = new THREE.Mesh( new THREE.CylinderGeometry(0.06, 0.06, 1, 32, 64), wardmaterial);
+			    kraks2.position.set(2.5, 0.5, 3.1);
+			stol4.add(kraks2);
+			var tabla1 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 0.1, 0.9), wardmaterial);
+			    tabla1.position.set(2.15, 1, 2.75);
+				tabla1.receiveShadow = true;
+				tabla1.castShadow = true;
+			stol4.add(tabla1);
+			var tabla2 = new THREE.Mesh( new THREE.BoxGeometry(0.9, 1.1, 0.1), wardmaterial);
+			    tabla2.position.set(2.15, 1.5, 2.3);
+				tabla2.receiveShadow = true;
+				tabla2.castShadow = true;
+			stol4.add(tabla2);
+			stol4.position.set(4.3, 0.1, 8);
+			stol4.rotation.set(0, 3.14, 0);
+
+			//mivka-kuhnq
+			var mivkak = new THREE.Mesh(new THREE.BoxGeometry(0.7, 1.3, 1.2), new THREE.MeshPhongMaterial({color:'grey'}));
+			    mivkak.position.set(7.5, 1.5, 2.3);
+				mivkak.receiveShadow = true;
+			    mivkak.castShadow = true;
+				//scene.add(mivkak);
+			var mivkak1 = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.15, 0.6), new THREE.MeshPhongMaterial({color:'black'}));
+			    mivkak1.position.set(7.45, 2.08, 2.1);
+				mivkak1.receiveShadow = true;
+			    mivkak1.castShadow = true;
+				//scene.add(mivkak1);
+			var csg = new CSG();
+			csg.subtract([mivkak, mivkak1]);
+			var mivkaa = csg.toMesh();
+			mivkaa.receiveShadow = true;
+			mivkaa.castShadow = true;
+			scene.add(mivkaa);
+
+			var mivkak3 = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.2, 0.04), new THREE.MeshPhongMaterial({color:'grey'}));
+			    mivkak3.position.set(7.45, 2.2, 2.48);
+				mivkak3.receiveShadow = true;
+			    mivkak3.castShadow = true;
+			scene.add(mivkak3);
+			var mivkak4 = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.26), new THREE.MeshPhongMaterial({color:'grey'}));
+			    mivkak4.position.set(7.45, 2.3, 2.37);
+				mivkak4.receiveShadow = true;
+			    mivkak4.castShadow = true;
+			scene.add(mivkak4);
+
+
+
+			
+
+			
+
+
+
+			
+
+
+
+			
+
+
+				
+					
+			
+		</script>
+		
+	</body>
+</html>
+
+
